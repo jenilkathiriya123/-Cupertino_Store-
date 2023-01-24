@@ -127,21 +127,23 @@ class _homepageState extends State<homepage> {
                                     padding: const EdgeInsets.only(right: 15),
                                     child: GestureDetector(
                                         onTap: () {
-                                          Global.name = e['name'];
+                                          Global.name = e['title'];
                                           Global.image = e['images'];
                                           Global.price = e['price'];
                                           Global.price2 = e['price2'];
                                           setState(() {
-                                            Map<String, dynamic> myMap = {
+                                            Map<String,dynamic> myList = {
                                               'title': Global.name,
-                                              'images': Global.image,
+                                              'image': Global.image,
                                               'price': Global.price,
                                               'price2': Global.price2,
                                             };
-                                            Global.ItemList.addAll([myMap]);
+                                            Global.ItemList.addAll([myList]);
+                                            Global.total = Global.total + int.parse(e['price']);
+
                                           });
                                         },
-                                        child: Icon(Icons.add_rounded)),
+                                        child: const Icon(Icons.add_rounded)),
                                   ),
                                 ],
                               ),
@@ -216,13 +218,21 @@ class _homepageState extends State<homepage> {
                                   padding: const EdgeInsets.only(right: 5),
                                   child: GestureDetector(
                                       onTap: () {
-                                        Map<String, dynamic> ItemList = {
-                                          'title': Global.name,
-                                          'images': Global.image,
-                                          'price': Global.price,
-                                          'price2': Global.price2,
-                                        };
-                                        Global.Search.addAll([ItemList]);
+                                        Global.name = e['title'];
+                                        Global.image = e['images'];
+                                        Global.price = e['price'];
+                                        Global.price2 = e['price2'];
+                                        setState(() {
+                                          Map<String,dynamic> myList = {
+                                            'title': Global.name,
+                                            'image': Global.image,
+                                            'price': Global.price,
+                                            'price2': Global.price2,
+                                          };
+                                          Global.ItemList.addAll([myList]);
+                                          Global.total = Global.total + int.parse(e['price']);
+
+                                        });
                                       },
                                       child: Icon(Icons.add_rounded)),
                                 ),
@@ -452,7 +462,7 @@ class _homepageState extends State<homepage> {
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 Text(
-                                  "Tax : ",
+                                  "\$ Tax : ",
                                   style: TextStyle(
                                       fontSize: 16,
                                       color: (Global.ItemList.isEmpty)
